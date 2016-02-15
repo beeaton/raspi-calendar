@@ -36,11 +36,10 @@ device = uinput.Device([
 	uinput.KEY_W
 	])
 
-view = 'm'
+#start google calendar with week view
+view = 'w'
+device.emit_click(uinput.KEY_W)
 
-
-LEDButtonOn=True
-MontionDetected = True
 LEDStartTime = time.time()
 MonitorStartTime = time.time()
 
@@ -104,16 +103,20 @@ try:
        
        if input_state_back == False:
            print("Button P Pressed")
+           LEDStartTime = time.time()
            device.emit_click(uinput.KEY_P)
            time.sleep(0.5)
        
        if input_state_forward == False:
            print("Button N Pressed.")
+           LEDStartTime = time.time()
            device.emit_click(uinput.KEY_N)
            time.sleep(0.5)
        
        if input_state_multi == False and input_state_back == False and input_state_forward == False:
            print("All buttons pressed.  Rebooting System"
+           LEDStartTime = time.time()
+           GPIO.cleanup()
            os.system("sudo reboot")
            
        if input_state_multi == False:
