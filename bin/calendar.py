@@ -16,14 +16,14 @@ pir_pin = 25
 
 GPIO.setmode(GPIO.BCM)
 
-GPIO.setup(buttonPrevPin, GPIO.IN, pull_up_down=GPIO.PUD_UP) 	#Previous button switch
-GPIO.setup(ledPrevPin, GPIO.OUT)								#Previous LED Pin
+GPIO.setup(buttonPrevPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)    #Previous button switch
+GPIO.setup(ledPrevPin, GPIO.OUT)                                #Previous LED Pin
  
-GPIO.setup(buttonNextPin, GPIO.IN, pull_up_down=GPIO.PUD_UP) 	#Next button switch
-GPIO.setup(ledNextPin, GPIO.OUT)								#Next LED Pin
+GPIO.setup(buttonNextPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)    #Next button switch
+GPIO.setup(ledNextPin, GPIO.OUT)                                #Next LED Pin
 
-GPIO.setup(buttonMultiPin, GPIO.IN, pull_up_down=GPIO.PUD_UP) 	#Multi-button switch 
-GPIO.setup(ledMultiPin, GPIO.OUT)								#Multi-button LED Pin
+GPIO.setup(buttonMultiPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)   #Multi-button switch 
+GPIO.setup(ledMultiPin, GPIO.OUT)                               #Multi-button LED Pin
 
 GPIO.setup(pir_pin, GPIO.IN)                                    #Enable PIR to sense montion
 
