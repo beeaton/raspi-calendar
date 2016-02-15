@@ -1,5 +1,8 @@
 #!/usr/bin/python
 
+#First version of the program as a test
+#Really cool
+
 import time
 import os
 import RPi.GPIO as GPIO #read the GPIO pins
