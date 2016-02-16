@@ -4,6 +4,11 @@ import time
 import os
 import RPi.GPIO as GPIO #read the GPIO pins
 import uinput
+import logging
+from logging.config import fileConfig
+
+fileConfig('logging.ini')
+logger = logging.getLogger()
 
 #initialize GPIO buttons
 buttonPrevPin = 17
@@ -47,31 +52,29 @@ MonitorStartTime = time.time()
 LEDTimeout = 10
 MonitorTimeout = 30
 
-
-print "Starting calendar app" + " " +time.strftime("%I:%M:%S")
-print "Turning on LED buttons and leaving on for " + str(LEDTimeout) +" seconds" + " " + time.strftime("%I:%M:%S")
+logger.info("   Starting calendar app")
 turnOnLEDButtons()
 turnOnMonitor()
 
 
 def turnOnLEDButtons():
-    print "Turning on LED lights on buttons"
+    logging.debug("   Turning on LED lights on buttons")
     GPIO.output(ledPrevPin, GPIO.HIGH)
     GPIO.output(ledNextPin, GPIO.HIGH)
     GPIO.output(ledMultiPin, GPIO.HIGH)
 
 def turnOffLEDButtons():
-    print "Turning off LED lights on buttons"
+    logging.debug("   Turning off LED lights on buttons")
     GPIO.output(ledPrevPin, GPIO.LOW)
     GPIO.output(ledNextPin, GPIO.LOW)
     GPIO.output(ledMultiPin, GPIO.LOW)
     
 def turnOffMonitor():
-    print "Montion detected and turning on monitor"
+    logging.debug("   Montion not detected and turning off monitor")
     os.system("xscreensaver-command -activate")
 
 def turnOnMonitor():
-    print "Montion not detected and turning off monitor"
+    logging.debug("   Montion detected and turning on monitor")
     os.system("xscreensaver-command -deactivate")
 
 
@@ -91,30 +94,30 @@ try:
            MontionDetected = False
        
        if time.time()-LEDStartTime < LEDTimeout: #LED will be on for 10 seconds after montion is detected
-           print "LED is still on "+str(time.time()-LEDStartTime) 
+           logging.debug("   LED is still on "+str(time.time()-LEDStartTime))
        else:
-           print "LED is now off"
+           logging.debug("   LED is now off")
         
        if time.time()-MonitorStartTime < MonitorTimeout: #Monitor screensaver will stay off for 30 seconds while montion is detected
-           print "Monitor is still on"
+           logging.debug("   Monitor is still on")
        else:
-           print "Turning off monitor"
+           logging.debug("   Turning off monitor")
            turnOffMonitor()
        
        if input_state_back == False:
-           print("Button P Pressed")
+           logging.debug("   Button P Pressed")
            LEDStartTime = time.time()
            device.emit_click(uinput.KEY_P)
            time.sleep(0.5)
        
        if input_state_forward == False:
-           print("Button N Pressed.")
+           logging.debug("   Button N Pressed.")
            LEDStartTime = time.time()
            device.emit_click(uinput.KEY_N)
            time.sleep(0.5)
        
        if input_state_multi == False and input_state_back == False and input_state_forward == False:
-           print("All buttons pressed.  Rebooting System"
+           logging.debug("   All buttons pressed.  Rebooting System")
            LEDStartTime = time.time()
            GPIO.cleanup()
            os.system("sudo reboot")
@@ -123,25 +126,24 @@ try:
            if view == 'm':
                device.emit_click(uinput.KEY_W)
                view = 'w'
-               print("Keypress W")
+               logging.debug("   Keypress W")
                time.sleep(0.5)
            if view == 'w':
                device.emit_click(uinput.KEY_A)
                view = 'a'
-               print("Keypress A")
+               logging.debug("   Keypress A")
                time.sleep(0.5)
            if view == 'a':
                device.emit_click(uinput.KEY_M)
                view = 'm'
-               print("Keypress M")
+               logging.debug("   Keypress M")
                time.sleep(0.5)
 except KeyboardInterrupt:  
-    print "Keyboard interrrupted code"
+    logging.debug("   Keyboard interrrupted code")
     
 #except Exception, e:
 #    print "Other exception"
     
 finally:
-    print "Cleaning up GPIO ports"
+    logging.debug("   Cleaning up GPIO ports")
     GPIO.cleanup()
-    
