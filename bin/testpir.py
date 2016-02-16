@@ -30,7 +30,7 @@ try:
            MontionDetected = False
            
        if time.time()-LEDStartTime < LEDTimeout: #LED will be on for 10 seconds after montion is detected
-            print "LED is still on "+str(time.time()-LEDStartTime) 
+            print "LED is on "+str(time.time()-LEDStartTime) 
        else:
             print "LED is now off"
 
