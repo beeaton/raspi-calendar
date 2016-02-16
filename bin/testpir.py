@@ -34,7 +34,13 @@ try:
             print "LED is on "+str(time.time()-LEDStartTime) 
        else:
             print "LED is now off"
-       time.sleep(0.5)
+            
+       if time.time()-MonitorStartTime < MonitorTimeout: #Monitor screensaver will stay off for 30 seconds while montion is detected
+           print "Monitor is still on " +str(time.time()-MonitorStartTime) 
+       else:
+           print "Turning off monitor"
+       
+       time.sleep(1)
 
 except KeyboardInterrupt:  
     print "Keyboard interrrupted code"
