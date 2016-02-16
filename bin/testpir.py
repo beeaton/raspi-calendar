@@ -34,7 +34,7 @@ try:
             print "LED is on "+str(time.time()-LEDStartTime) 
        else:
             print "LED is now off"
-    time.sleep(0.5)
+       time.sleep(0.5)
 
 except KeyboardInterrupt:  
     print "Keyboard interrrupted code"
