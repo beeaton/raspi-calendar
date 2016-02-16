@@ -4,6 +4,7 @@ import time
 import os
 import RPi.GPIO as GPIO #read the GPIO pins
 
+GPIO.setmode(GPIO.BCM)
 
 pir_pin = 25
 
