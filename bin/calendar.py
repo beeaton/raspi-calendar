@@ -141,8 +141,8 @@ try:
 except KeyboardInterrupt:  
     logging.debug("   Keyboard interrrupted code")
     
-#except Exception, e:
-#    print "Other exception"
+except Exception, e:
+    logging.debug(   "Other exception")
     
 finally:
     logging.debug("   Cleaning up GPIO ports")
