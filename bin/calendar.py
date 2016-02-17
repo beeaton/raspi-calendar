@@ -37,7 +37,7 @@ device = uinput.Device([
     uinput.KEY_N,
 	uinput.KEY_F5,
 	uinput.KEY_M,
-	uinput.KEY_A
+	uinput.KEY_A,
 	uinput.KEY_W
 	])
 
