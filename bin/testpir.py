@@ -50,7 +50,7 @@ try:
        else:
            print "Turning off monitor"
        
-       if input_state_back == True:
+       if input_state_back == False:
            print("   Button P Pressed")
            LEDStartTime = time.time()
            time.sleep(0.5)
