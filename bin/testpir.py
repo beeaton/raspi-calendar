@@ -55,8 +55,6 @@ try:
            LEDStartTime = time.time()
            time.sleep(0.5)
            
-       time.sleep(1)
-
 except KeyboardInterrupt:  
     print "Keyboard interrrupted code"
 
