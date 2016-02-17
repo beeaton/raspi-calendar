@@ -53,9 +53,6 @@ LEDTimeout = 10
 MonitorTimeout = 30
 
 logger.info("   Starting calendar app")
-turnOnLEDButtons()
-turnOnMonitor()
-
 
 def turnOnLEDButtons():
     logging.debug("   Turning on LED lights on buttons")
@@ -77,6 +74,8 @@ def turnOnMonitor():
     logging.debug("   Montion detected and turning on monitor")
     os.system("xscreensaver-command -deactivate")
 
+turnOnLEDButtons()
+turnOnMonitor()
 
 #Start Main program
 try:
