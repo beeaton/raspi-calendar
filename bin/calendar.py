@@ -11,12 +11,17 @@ fileConfig('logging.ini')
 logger = logging.getLogger()
 
 #initialize GPIO buttons
+ledPrevPin = 4
 buttonPrevPin = 17
-ledPrevPin = 18
-buttonNextPin = 21
-ledNextPin = 23
-buttonMultiPin = 22
-ledMultiPin = 24
+
+ledNextPin = 27
+buttonNextPin = 22
+
+ledMultiPin = 18
+buttonMultiPin = 23
+
+powerLED = 24
+
 pir_pin = 25
 
 GPIO.setmode(GPIO.BCM)
@@ -35,7 +40,6 @@ GPIO.setup(pir_pin, GPIO.IN)                                    #Enable PIR to s
 device = uinput.Device([
     uinput.KEY_P,
     uinput.KEY_N,
-	uinput.KEY_F5,
 	uinput.KEY_M,
 	uinput.KEY_A,
 	uinput.KEY_W
