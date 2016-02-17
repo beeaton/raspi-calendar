@@ -16,6 +16,7 @@ try:
         i = 1
         
 except KeyboardInterrupt:  
+    GPIO.cleanup()
     
 finally:
     GPIO.cleanup()
