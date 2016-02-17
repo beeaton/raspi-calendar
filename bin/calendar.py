@@ -56,8 +56,6 @@ MonitorStartTime = time.time()
 LEDTimeout = 10
 MonitorTimeout = 30
 
-logger.info("   Starting calendar app")
-
 def turnOnLEDButtons():
     logging.debug("   Turning on LED lights on buttons")
     GPIO.output(ledPrevPin, GPIO.HIGH)
@@ -78,11 +76,12 @@ def turnOnMonitor():
     logging.debug("   Montion detected and turning on monitor")
     os.system("xscreensaver-command -deactivate")
 
-turnOnLEDButtons()
-turnOnMonitor()
-
 #Start Main program
 try:
+    logger.info("   Starting calendar app")
+    turnOnLEDButtons()
+    turnOnMonitor()
+
    while True:
        input_state_back = GPIO.input(buttonPrevPin)
        input_state_forward = GPIO.input(buttonNextPin)
