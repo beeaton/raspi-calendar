@@ -45,7 +45,8 @@ try:
             GPIO.output(ledPrevPin, GPIO.LOW)
             
        if time.time()-MonitorStartTime < MonitorTimeout: #Monitor screensaver will stay off for 30 seconds while montion is detected
-           #print "Monitor is still on " +str(time.time()-MonitorStartTime) 
+           #print "Monitor is still on " +str(time.time()-MonitorStartTime)
+           i=1
        else:
            print "Turning off monitor"
        
