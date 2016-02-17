@@ -37,6 +37,7 @@ try:
            
        if time.time()-LEDStartTime < LEDTimeout: #LED will be on for 10 seconds after montion is detected
             print "LED is on "+str(time.time()-LEDStartTime) 
+            GPIO.output(ledPrevPin, GPIO.HIGH)
        else:
             GPIO.output(ledPrevPin, GPIO.LOW)
             
