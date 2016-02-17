@@ -39,17 +39,17 @@ try:
            MontionDetected = False
            
        if time.time()-LEDStartTime < LEDTimeout: #LED will be on for 10 seconds after montion is detected
-            print "LED is on "+str(time.time()-LEDStartTime) 
+            #print "LED is on "+str(time.time()-LEDStartTime) 
             GPIO.output(ledPrevPin, GPIO.HIGH)
        else:
             GPIO.output(ledPrevPin, GPIO.LOW)
             
        if time.time()-MonitorStartTime < MonitorTimeout: #Monitor screensaver will stay off for 30 seconds while montion is detected
-           print "Monitor is still on " +str(time.time()-MonitorStartTime) 
+           #print "Monitor is still on " +str(time.time()-MonitorStartTime) 
        else:
            print "Turning off monitor"
        
-       if input_state_back == False:
+       if input_state_back == True:
            print("   Button P Pressed")
            LEDStartTime = time.time()
            time.sleep(0.5)
