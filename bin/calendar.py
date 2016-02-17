@@ -89,6 +89,8 @@ try:
            MontionDetected = True
            LEDStartTime = time.time()
            MonitorStartTime = time.time()
+           turnOnLEDButtons()
+           turnOnMonitor()
        else:
            MontionDetected = False
        
@@ -128,7 +130,7 @@ try:
                view = 'w'
                logging.debug("   Keypress W")
                time.sleep(0.5)
-           if view == 'w':
+           if view == 'w':  
                device.emit_click(uinput.KEY_A)
                view = 'a'
                logging.debug("   Keypress A")
