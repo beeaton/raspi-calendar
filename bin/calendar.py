@@ -107,19 +107,19 @@ try:
            turnOffMonitor()
        
        if input_state_back == False:
-           logging.debug("   Button P Pressed")
+           logging.info("   Button P Pressed")
            LEDStartTime = time.time()
            device.emit_click(uinput.KEY_P)
            time.sleep(0.5)
        
        if input_state_forward == False:
-           logging.debug("   Button N Pressed.")
+           logging.info("   Button N Pressed.")
            LEDStartTime = time.time()
            device.emit_click(uinput.KEY_N)
            time.sleep(0.5)
        
        if input_state_multi == False and input_state_back == False and input_state_forward == False:
-           logging.debug("   All buttons pressed.  Rebooting System")
+           logging.info("   All buttons pressed.  Rebooting System")
            LEDStartTime = time.time()
            GPIO.cleanup()
            os.system("sudo reboot")
