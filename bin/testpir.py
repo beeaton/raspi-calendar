@@ -8,12 +8,14 @@ GPIO.setmode(GPIO.BCM)
 
 pir_pin = 25
 ledPrevPin = 18
+buttonPrevPin = 17
 
 GPIO.setup(pir_pin, GPIO.IN)                                    #Enable PIR to sense montion
 
 GPIO.setup(ledPrevPin, GPIO.OUT)                                #Previous LED Pin
 GPIO.output(ledPrevPin, GPIO.HIGH)
 
+GPIO.setup(buttonPrevPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)    #Previous button switch
 
 LEDStartTime = time.time()
 MonitorStartTime = time.time()
@@ -27,6 +29,7 @@ MonitorTimeout = 30
 try:
    while True:
        input_motion_detected = GPIO.input(pir_pin)
+       input_state_back = GPIO.input(buttonPrevPin)
        
        if input_motion_detected:
            MontionDetected = True
@@ -46,6 +49,11 @@ try:
        else:
            print "Turning off monitor"
        
+       if input_state_back == False:
+           print("   Button P Pressed")
+           LEDStartTime = time.time()
+           time.sleep(0.5)
+           
        time.sleep(1)
 
 except KeyboardInterrupt:  
