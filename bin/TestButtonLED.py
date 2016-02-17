@@ -11,5 +11,11 @@ GPIO.setup(ledPrevPin, GPIO.OUT)                                #Previous LED Pi
 
 GPIO.output(ledPrevPin, GPIO.HIGH)
 
-while True:
-    i = 1
+try:
+    while True:
+        i = 1
+        
+except KeyboardInterrupt:  
+    
+finally:
+    GPIO.cleanup()
