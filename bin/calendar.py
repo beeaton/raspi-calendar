@@ -10,6 +10,8 @@ from logging.config import fileConfig
 fileConfig('logging.ini')
 logger = logging.getLogger()
 
+#testin git push
+
 #initialize GPIO buttons
 ledPrevPin = 4
 buttonPrevPin = 17
@@ -79,7 +81,7 @@ def turnOnMonitor():
 #Start Main program
 try:
     logger.info("   Starting calendar app")
-    turnOnLEDButtons()
+    #turnOnLEDButtons() - Not enough pins on the current pi to support LED
     turnOnMonitor()
 
     while True:
@@ -92,7 +94,7 @@ try:
            MontionDetected = True
            LEDStartTime = time.time()
            MonitorStartTime = time.time()
-           turnOnLEDButtons()
+           #turnOnLEDButtons() - Not enough pins on the current pi to support LED
            turnOnMonitor()
        else:
            MontionDetected = False
@@ -100,7 +102,7 @@ try:
        if time.time()-LEDStartTime < LEDTimeout: #LED will be on for 10 seconds after montion is detected
            logging.debug("   LED is still on "+str(time.time()-LEDStartTime))
        else:
-           turnOffLEDButtons()
+           #turnOffLEDButtons() - Not enough pins on the current pi to support LED
            logging.debug("   LED is now off")
         
        if time.time()-MonitorStartTime < MonitorTimeout: #Monitor screensaver will stay off for 30 seconds while montion is detected
