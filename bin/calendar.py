@@ -82,7 +82,7 @@ try:
     turnOnLEDButtons()
     turnOnMonitor()
 
-   while True:
+    while True:
        input_state_back = GPIO.input(buttonPrevPin)
        input_state_forward = GPIO.input(buttonNextPin)
        input_state_multi = GPIO.input(buttonMultiPin)
