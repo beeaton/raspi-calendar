@@ -10,7 +10,7 @@ from logging.config import fileConfig
 fileConfig('logging.ini')
 logger = logging.getLogger()
 
-#testin git push
+#testin git push - Making sure it works
 
 #initialize GPIO buttons
 ledPrevPin = 4
