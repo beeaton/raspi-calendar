@@ -16,7 +16,7 @@ logger = logging.getLogger()
 ledPrevPin = 4
 buttonPrevPin = 17
 
-ledNextPin = 27
+ledNextPin = 21
 buttonNextPin = 22
 
 ledMultiPin = 18
