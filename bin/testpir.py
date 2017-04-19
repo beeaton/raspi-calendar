@@ -32,6 +32,7 @@ try:
        input_state_back = GPIO.input(buttonPrevPin)
        
        if input_motion_detected:
+           print "Motion Detected"
            MontionDetected = True
            LEDStartTime = time.time()
            MonitorStartTime = time.time()
