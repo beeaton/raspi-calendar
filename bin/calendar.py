@@ -44,6 +44,7 @@ device = uinput.Device([
     uinput.KEY_N,
     uinput.KEY_M,
     uinput.KEY_A,
+    uinput.KEY_T,
     uinput.KEY_W
 	])
 
@@ -77,8 +78,8 @@ def turnOffMonitor():
     
 def turnOnMonitor():
    if MonitorOn == False:
-    logger.info("   Montion detected and turning on monitor")
-    os.system("xscreensaver-command -deactivate")
+       logger.info("   Montion detected and turning on monitor")
+       os.system("xscreensaver-command -deactivate")
 
 #Start Main program
 try:
@@ -126,6 +127,13 @@ try:
            logging.info("   Button N Pressed.")
            LEDStartTime = time.time()
            device.emit_click(uinput.KEY_N)
+           time.sleep(0.5)
+       
+       if input_state_back == False and input_state_forward == False:
+           logger.info("     Back and Forward buttons pressed, set calendar to today")
+           LEDStartTime = time.time()
+           device.emit_click(uinput.KEY_T)
+           turnOnLEDButtons()
            time.sleep(0.5)
        
        if input_state_multi == False and input_state_back == False and input_state_forward == False:
