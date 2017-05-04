@@ -10,19 +10,19 @@ from logging.config import fileConfig
 fileConfig('logging.ini')
 logger = logging.getLogger()
 
+MonitorOn = False
+
 #testin git push - Making sure it works
 
 #initialize GPIO buttons
 ledPrevPin = 4
 buttonPrevPin = 17
 
-ledNextPin = 21
+ledNextPin = 27
 buttonNextPin = 22
 
 ledMultiPin = 18
 buttonMultiPin = 23
-
-powerLED = 24
 
 pir_pin = 25
 
@@ -71,17 +71,19 @@ def turnOffLEDButtons():
     GPIO.output(ledMultiPin, GPIO.LOW)
     
 def turnOffMonitor():
-    logging.debug("   Montion not detected and turning off monitor")
-    os.system("xscreensaver-command -activate")
-
+   if MonitorOn:
+       logger.info("   Montion not detected and turning off monitor")
+       os.system("xscreensaver-command -activate")
+    
 def turnOnMonitor():
-    logging.debug("   Montion detected and turning on monitor")
+   if MonitorOn == False:
+    logger.info("   Montion detected and turning on monitor")
     os.system("xscreensaver-command -deactivate")
 
 #Start Main program
 try:
     logger.info("   Starting calendar app")
-    #turnOnLEDButtons() - Not enough pins on the current pi to support LED
+    turnOnLEDButtons()
     turnOnMonitor()
 
     while True:
@@ -94,15 +96,16 @@ try:
            MontionDetected = True
            LEDStartTime = time.time()
            MonitorStartTime = time.time()
-           #turnOnLEDButtons() - Not enough pins on the current pi to support LED
+           turnOnLEDButtons()
            turnOnMonitor()
+           MonitorOn = True
        else:
            MontionDetected = False
        
        if time.time()-LEDStartTime < LEDTimeout: #LED will be on for 10 seconds after montion is detected
            logging.debug("   LED is still on "+str(time.time()-LEDStartTime))
        else:
-           #turnOffLEDButtons() - Not enough pins on the current pi to support LED
+           turnOffLEDButtons()
            logging.debug("   LED is now off")
         
        if time.time()-MonitorStartTime < MonitorTimeout: #Monitor screensaver will stay off for 30 seconds while montion is detected
@@ -110,11 +113,13 @@ try:
        else:
            logging.debug("   Turning off monitor")
            turnOffMonitor()
+           MonitorOn = False
        
        if input_state_back == False:
            logging.info("   Button P Pressed")
            LEDStartTime = time.time()
            device.emit_click(uinput.KEY_P)
+           turnOnLEDButtons()
            time.sleep(0.5)
        
        if input_state_forward == False:
@@ -146,11 +151,8 @@ try:
                logging.debug("   Keypress M")
                time.sleep(0.5)
 except KeyboardInterrupt:  
-    logging.debug("   Keyboard interrrupted code")
-    
-except Exception, e:
-    logging.debug(   "Other exception")
+    logger.info("   Keyboard interrrupted code")
     
 finally:
-    logging.debug("   Cleaning up GPIO ports")
+    logger.info("   Cleaning up GPIO ports")
     GPIO.cleanup()
