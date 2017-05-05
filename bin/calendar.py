@@ -5,6 +5,7 @@ import os
 import RPi.GPIO as GPIO #read the GPIO pins
 import uinput
 import logging
+import subprocess
 from logging.config import fileConfig
 
 fileConfig('logging.ini')
@@ -74,12 +75,14 @@ def turnOffLEDButtons():
 def turnOffMonitor():
    if MonitorOn:
        logger.info("   Montion not detected and turning off monitor")
-       os.system("xscreensaver-command -activate")
+       #os.system("xscreensaver-command -activate")
+       subprocess.call('xset dpms force off', shell=True)
     
 def turnOnMonitor():
    if MonitorOn == False:
        logger.info("   Montion detected and turning on monitor")
-       os.system("xscreensaver-command -deactivate")
+       #os.system("xscreensaver-command -deactivate")
+       subprocess.call('xset dpms force on', shell=True)
 
 #Start Main program
 try:
